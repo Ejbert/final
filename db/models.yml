@@ -1,0 +1,23 @@
+User:
+  username: string
+  first_name: string
+  last_name: string
+  email: string
+  password: string
+
+Friend:
+  user_id: integer
+  friend: integer
+
+Ingredient:
+  name: string
+
+Dish:
+  name: string
+  description: text
+
+Recipe:
+  dish_id: integer
+  ingredient_id: integer
+  quantity: number
+  unit: string
