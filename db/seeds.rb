@@ -38,22 +38,26 @@ Friend.create(user_id: kristen.id, friend: jane.id)
 
 # Create Greg's friends
 Friend.create(user_id: greg.id, friend: eric.id)
-Friend.create(user_id: greg.id, friends: jane.id)
+Friend.create(user_id: greg.id, friend: jane.id)
 
 # Create ingredients
 puts "Creating ingredients..."
 cheese = Ingredient.create(name: "Cheese")
-pizza_sauce = Ingredient.create(name: "Pizza Sauce")
+marinara_sauce = Ingredient.create(name: "Marinara Sauce")
 flour = Ingredient.create(name: "Flour")
 pepperoni = Ingredient.create(name: "Pepperoni")
 olives = Ingredient.create(name: "Olives")
 onions = Ingredient.create(name: "Onions")
+spaghetti_noodles = Ingredient.create(name: "Spaghetti Noodles")
+lettuce = Ingredient.create(name: "Lettuce")
 
 # Create dishes
 puts "Creating dishes..."
-pepperoni_pizza = Dish.create(name: "Pepperoni Pizza", description: "A delicious, meaty and greasy classic pizza")
+pepperoni_pizza = Dish.create(name: "Pepperoni Pizza", description: "A delicious and greasy classic pizza")
 cheese_pizza = Dish.create(name: "Cheese Pizza", description: "Ask for extra cheese")
 veggie_pizza = Dish.create(name: "Veggie Pizza", description: "For the healthnuts")
+spaghetti_pomodoro = Dish.create(name: "Spaghetti Pomodoro", description: "Simple and tasty")
+salad = Dish.create(name: "Salad", description: "House salad")
 
 # Create recipe
 puts "Creating recipes..."
@@ -61,14 +65,29 @@ puts "Creating recipes..."
  # Create the recipe for Pepperoni Pizza
 Recipe.create(dish_id: pepperoni_pizza.id, ingredient_id: cheese.id, quantity: 0.5, unit: 'lbs')
 Recipe.create(dish_id: pepperoni_pizza.id, ingredient_id: flour.id, quantity: 2, unit: 'cups')
-Recipe.create(dish_id: pepperoni_pizza.id, ingredient_id: pizza_sauce.id, quantity: 4, unit: 'oz')
-Recipe.create(dish_id: pepperoni_pizza.id, ingredient_id: cheese.id, quantity: 0.5, unit: 'lbs')
+Recipe.create(dish_id: pepperoni_pizza.id, ingredient_id: marinara_sauce.id, quantity: 4, unit: 'oz')
 Recipe.create(dish_id: pepperoni_pizza.id, ingredient_id: pepperoni.id, quantity: 6, unit: 'oz')
 
  # Create the recipe for Cheese Pizza
 Recipe.create(dish_id: cheese_pizza.id, ingredient_id: cheese.id, quantity: 0.5, unit: 'lbs')
 Recipe.create(dish_id: cheese_pizza.id, ingredient_id: flour.id, quantity: 2, unit: 'cups')
-Recipe.create(dish_id: cheese_pizza.id, ingredient_id: pizza_sauce.id, quantity: 4, unit: 'oz')
-Recipe.create(dish_id: cheese_pizza.id, ingredient_id: cheese.id, quantity: 0.5, unit: 'lbs')
+Recipe.create(dish_id: cheese_pizza.id, ingredient_id: marinara_sauce.id, quantity: 4, unit: 'oz')
 
+ # Create the recipe for Veggie Pizza
+Recipe.create(dish_id: veggie_pizza.id, ingredient_id: cheese.id, quantity: 0.5, unit: 'lbs')
+Recipe.create(dish_id: veggie_pizza.id, ingredient_id: flour.id, quantity: 2, unit: 'cups')
+Recipe.create(dish_id: veggie_pizza.id, ingredient_id: marinara_sauce.id, quantity: 4, unit: 'oz')
+Recipe.create(dish_id: veggie_pizza.id, ingredient_id: olives.id, quantity: 4, unit: 'oz')
+Recipe.create(dish_id: veggie_pizza.id, ingredient_id: onions.id, quantity: 4, unit: 'oz')
+
+# Create the recipe for Spaghetti Pomodoro
+Recipe.create(dish_id: spaghetti_pomodoro.id, ingredient_id: cheese.id, quantity: 2, unit: 'oz')
+Recipe.create(dish_id: spaghetti_pomodoro.id, ingredient_id: spaghetti_noodles.id, quantity: 8, unit: 'oz')
+Recipe.create(dish_id: spaghetti_pomodoro.id, ingredient_id: marinara_sauce.id, quantity: 4, unit: 'oz')
+
+# Create the recipe for Salad
+Recipe.create(dish_id: salad.id, ingredient_id: lettuce.id, quantity: 6, unit: 'oz')
+Recipe.create(dish_id: salad.id, ingredient_id: cheese.id, quantity: 1, unit: 'oz')
+Recipe.create(dish_id: salad.id, ingredient_id: onions.id, quantity: 2, unit: 'oz')
+Recipe.create(dish_id: salad.id, ingredient_id: olives.id, quantity: 2, unit: 'oz')
 

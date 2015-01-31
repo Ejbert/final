@@ -1,0 +1,21 @@
+<h1><%= @dish.name %> </h1>
+
+<h3><%= @dish.description %></h3>
+
+<h3>Recipe:</h3>
+
+<table class="table table-striped table-bordered">
+  <tr>
+    <th>Ingredient</th>
+    <th>Quantity</th>
+    <th>Unit</th>
+  </tr>
+
+  <% @ingredients.each do |ingredient| %>
+    <tr>
+      <td><%= ingredient.name %></td>
+      <td><%= @recipe_elements.find_by(ingredient_id: ingredient.id).quantity%></td>
+      <td><%= @recipe_elements.find_by(ingredient_id: ingredient.id).unit%></td>
+    </tr>
+  <% end %>
+</table>
