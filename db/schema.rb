@@ -13,11 +13,6 @@
 
 ActiveRecord::Schema.define(version: 0) do
 
-  create_table "dishes", force: :cascade do |t|
-    t.string "name"
-    t.text   "description"
-  end
-
   create_table "friends", force: :cascade do |t|
     t.integer "user_id"
     t.integer "friend"
@@ -25,19 +20,38 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "friends", ["user_id"], name: "index_friends_on_user_id"
 
-  create_table "ingredients", force: :cascade do |t|
+  create_table "list_items", force: :cascade do |t|
+    t.integer "list_id"
+    t.integer "restaurant_id"
+  end
+
+  add_index "list_items", ["list_id"], name: "index_list_items_on_list_id"
+  add_index "list_items", ["restaurant_id"], name: "index_list_items_on_restaurant_id"
+
+  create_table "lists", force: :cascade do |t|
+    t.integer "user_id"
+    t.string  "name"
+  end
+
+  add_index "lists", ["user_id"], name: "index_lists_on_user_id"
+
+  create_table "restaurants", force: :cascade do |t|
     t.string "name"
+    t.text   "description"
+    t.string "cuisine"
+    t.text   "location"
   end
 
-  create_table "recipes", force: :cascade do |t|
-    t.integer "dish_id"
-    t.integer "ingredient_id"
-    t.decimal "quantity"
-    t.string  "unit"
+  create_table "reviews", force: :cascade do |t|
+    t.integer "restaurant_id"
+    t.integer "user_id"
+    t.text    "review"
+    t.integer "rating"
+    t.text    "notes"
   end
 
-  add_index "recipes", ["dish_id"], name: "index_recipes_on_dish_id"
-  add_index "recipes", ["ingredient_id"], name: "index_recipes_on_ingredient_id"
+  add_index "reviews", ["restaurant_id"], name: "index_reviews_on_restaurant_id"
+  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string "username"

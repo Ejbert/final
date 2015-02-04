@@ -2,9 +2,9 @@
 puts "Deleting all records from the database"
 User.delete_all
 Friend.delete_all
-Ingredient.delete_all
-Dish.delete_all
-Recipe.delete_all
+Restaurant.delete_all
+Review.delete_all
+List.delete_all
 
 # Create the users
 puts "Creating users..."
@@ -40,54 +40,45 @@ Friend.create(user_id: kristen.id, friend: jane.id)
 Friend.create(user_id: greg.id, friend: eric.id)
 Friend.create(user_id: greg.id, friend: jane.id)
 
-# Create ingredients
-puts "Creating ingredients..."
-cheese = Ingredient.create(name: "Cheese")
-marinara_sauce = Ingredient.create(name: "Marinara Sauce")
-flour = Ingredient.create(name: "Flour")
-pepperoni = Ingredient.create(name: "Pepperoni")
-olives = Ingredient.create(name: "Olives")
-onions = Ingredient.create(name: "Onions")
-spaghetti_noodles = Ingredient.create(name: "Spaghetti Noodles")
-lettuce = Ingredient.create(name: "Lettuce")
+# Create restaurants
+puts "Creating restaurants..."
+boltwood = Restaurant.create(name: "Boltwood", description: "New, local American by former Publican chef", cuisine:"American", location: "Evanston")
+the_cellar = Restaurant.create(name: "The Cellar", description: "Underground feel in ground-level restaurant", cuisine:"American", location: "Evanston")
+burger_king = Restaurant.create(name: "Burger King", description: "Open 24 hours...", cuisine:"Fast Food", location: "Evanston")
+taco_diablo = Restaurant.create(name: "Taco Diablo", description: "RIP", cuisine:"Mexican", location: "Heaven")
+lyfe_kitchen = Restaurant.create(name: "LYFE Kitchen", description: "Healthy food chain", cuisine:"Health Food", location: "Evanston")
 
-# Create dishes
-puts "Creating dishes..."
-pepperoni_pizza = Dish.create(name: "Pepperoni Pizza", description: "A delicious and greasy classic pizza")
-cheese_pizza = Dish.create(name: "Cheese Pizza", description: "Ask for extra cheese")
-veggie_pizza = Dish.create(name: "Veggie Pizza", description: "For the healthnuts")
-spaghetti_pomodoro = Dish.create(name: "Spaghetti Pomodoro", description: "Simple and tasty")
-salad = Dish.create(name: "Salad", description: "House salad")
+# Create reviews
+puts "Creating reviews..."
+Review.create(restaurant_id: boltwood.id, user_id: eric.id, rating: 4, review: "Great addition to Evanston dining scene, even if not quite up to expectations", notes: "Dollar oysters on some nights")
+Review.create(restaurant_id: the_cellar.id, user_id: orchid.id, rating: 5, review: "Great good at totally reasonable prices", notes: "Try to sit in the back")
 
-# Create recipe
-puts "Creating recipes..."
+Review.create(restaurant_id: burger_king.id, user_id: eric.id, rating: 3, review: "Late night dance party is even better than the food", notes: "Never go during daylight")
+Review.create(restaurant_id: burger_king.id, user_id: greg.id, rating: 5, review: "Best cheeseburgers this side of the Mississippi", notes: "Make your own soda mix")
 
- # Create the recipe for Pepperoni Pizza
-Recipe.create(dish_id: pepperoni_pizza.id, ingredient_id: cheese.id, quantity: 0.5, unit: 'lbs')
-Recipe.create(dish_id: pepperoni_pizza.id, ingredient_id: flour.id, quantity: 2, unit: 'cups')
-Recipe.create(dish_id: pepperoni_pizza.id, ingredient_id: marinara_sauce.id, quantity: 4, unit: 'oz')
-Recipe.create(dish_id: pepperoni_pizza.id, ingredient_id: pepperoni.id, quantity: 6, unit: 'oz')
+Review.create(restaurant_id: taco_diablo.id, user_id: kristen.id, rating: 5, review: "Evanston sorely misses the tacos and vibe of this place", notes: "Have a taco before throwing back too many margaritas")
 
- # Create the recipe for Cheese Pizza
-Recipe.create(dish_id: cheese_pizza.id, ingredient_id: cheese.id, quantity: 0.5, unit: 'lbs')
-Recipe.create(dish_id: cheese_pizza.id, ingredient_id: flour.id, quantity: 2, unit: 'cups')
-Recipe.create(dish_id: cheese_pizza.id, ingredient_id: marinara_sauce.id, quantity: 4, unit: 'oz')
 
- # Create the recipe for Veggie Pizza
-Recipe.create(dish_id: veggie_pizza.id, ingredient_id: cheese.id, quantity: 0.5, unit: 'lbs')
-Recipe.create(dish_id: veggie_pizza.id, ingredient_id: flour.id, quantity: 2, unit: 'cups')
-Recipe.create(dish_id: veggie_pizza.id, ingredient_id: marinara_sauce.id, quantity: 4, unit: 'oz')
-Recipe.create(dish_id: veggie_pizza.id, ingredient_id: olives.id, quantity: 4, unit: 'oz')
-Recipe.create(dish_id: veggie_pizza.id, ingredient_id: onions.id, quantity: 4, unit: 'oz')
+# Create lists
+puts "Creating lists..."
 
-# Create the recipe for Spaghetti Pomodoro
-Recipe.create(dish_id: spaghetti_pomodoro.id, ingredient_id: cheese.id, quantity: 2, unit: 'oz')
-Recipe.create(dish_id: spaghetti_pomodoro.id, ingredient_id: spaghetti_noodles.id, quantity: 8, unit: 'oz')
-Recipe.create(dish_id: spaghetti_pomodoro.id, ingredient_id: marinara_sauce.id, quantity: 4, unit: 'oz')
+need_to_try = List.create(user_id: eric.id, name: "Need to try")
 
-# Create the recipe for Salad
-Recipe.create(dish_id: salad.id, ingredient_id: lettuce.id, quantity: 6, unit: 'oz')
-Recipe.create(dish_id: salad.id, ingredient_id: cheese.id, quantity: 1, unit: 'oz')
-Recipe.create(dish_id: salad.id, ingredient_id: onions.id, quantity: 2, unit: 'oz')
-Recipe.create(dish_id: salad.id, ingredient_id: olives.id, quantity: 2, unit: 'oz')
+date_night = List.create(user_id: eric.id, name: "Date night")
+
+avoid = List.create(user_id: jane.id, name: "Avoid at all costs")
+
+detox = List.create(user_id: greg.id, name: "For detox diet")
+
+# Create list items
+puts "Populating lists..."
+
+List_Item.create(list_id: need_to_try.id, restaurant_id: lyfe_kitchen.id)
+List_Item.create(list_id: need_to_try.id, restaurant_id: the_cellar.id)
+
+List_Item.create(list_id: date_night.id, restaurant_id: boltwood.id)
+
+List_Item.create(list_id: avoid.id, restaurant_id: burger_king.id)
+
+List_Item.create(list_id: detox.id, restaurant_id: lyfe_kitchen.id)
 
