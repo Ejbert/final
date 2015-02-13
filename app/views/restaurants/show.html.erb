@@ -1,7 +1,20 @@
 <h1><%= @restaurant.name %> </h1>
 <h5><%= @restaurant.cuisine %></h5>
-<p><em> <%= @restaurant.location %> </em></p>
+<p><em>Location: <%= @restaurant.location %> </em></p>
 
 <p><%= @restaurant.description %></p>
+<br>
 
 <h3>Reviews</h3>
+<% @reviews.each do |review| %>
+  <br>
+
+  <p><b><%= review.rating %> / 5 Stars</b></p>
+  
+  <% @users.each do |user| %>
+    <p>Reviewer: <%= user.username %></p>
+  <% end %>
+  
+  <p><%= review.review %></p>
+<% end %>
+
