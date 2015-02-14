@@ -1,84 +1,60 @@
 # Deletes everything from the database to start fresh
 puts "Deleting all records from the database"
 User.delete_all
-Friend.delete_all
-Restaurant.delete_all
+Course.delete_all
+Team.delete_all
+Team_Member.delete_all
 Review.delete_all
-List.delete_all
 
 # Create the users
 puts "Creating users..."
 eric = User.create(username: "ejbert", first_name: "Eric", last_name:"Bertelsen", email:"eric.bertelsen@gmail.com", password:"****")
-orchid = User.create(username: "orchidliu", first_name: "Orchid", last_name:"Liu", email:"orchid.jade.liu@gmail.com", password:"****")
-jane = User.create(username: "mjbert", first_name: "Jane", last_name:"Bertelsen", email:"mjbert@gmail.com", password:"****")
-kristen = User.create(username: "kmbert", first_name: "Kristen", last_name:"Bertelsen", email:"kristen.bertelsen@gmail.com", password:"****")
-greg = User.create(username: "gjbert", first_name: "Greg", last_name:"Bertelsen", email:"gjbertgmail.com", password:"****")
+sam = User.create(username: "ssmith", first_name: "Sam", last_name:"Smith", email:"ssmith@hotmail.com", password:"****")
+dave = User.create(username: "dweinman", first_name: "Dave", last_name:"Weinman", email:"dweinman2016@kellogg.northwestern.edu", password:"****")
+claudia = User.create(username: "claud", first_name: "Claudia", last_name:"Jones", email:"cjones@yahoo.com", password:"****")
+tony = User.create(username: "tttony", first_name: "Tony", last_name: "Jefferson", email:"tjeff@me.com", password:"****")
 
-puts "Creating friends..."
 
-# Create Eric's friends
-Friend.create(user_id: eric.id, friend: orchid.id)
-Friend.create(user_id: eric.id, friend: jane.id)
-Friend.create(user_id: eric.id, friend: kristen.id)
-Friend.create(user_id: eric.id, friend: greg.id)
+#Create the courses
+puts "Creating courses..."
+mors430 = Course.create(name: "MORS 430 - Leadership in Organizations", description: "Pre-term class on how to be a leader", section: 61, quarter: "Fall", year: 2014)
+opns430 = Course.create(name: "OPNS 430 - Operations Management", description: "The important stuff", section: 62, quarter: "Fall", year: 2014)
+kiei925 = Course.create(name: "KIEI 925 - Startup Programming and Management", description: "The best class at Kellogg", section: 62, quarter: "Winter", year: 2015)
+mgmt431 = Course.create(name: "MGMT 431 - Business Strategy", description: "Competition and market dynamics", section: 64, quarter: "Fall", year: 2014)
+mktg430 = Course.create(name: "MKTG 430 - Marketing Management", description: "Maybe more quantitative than you think", section: 63, quarter: "Fall", year: 2014)
 
-# Create Orchid's friends
-Friend.create(user_id: orchid.id, friend: eric.id)
-Friend.create(user_id: orchid.id, friend: kristen.id)
+# Create teams
+puts "Creating teams..."
+team1 = Team.create(course_id: mors430.id, name: "Team 1", description: "Analyize an executive's network")
+team2 = Team.create(course_id: opns430.id, name: "62-01", description: "For cases and group assignments")
+team3 = Team.create(course_id: kiei925.id, name: "Team DAK: Drive for Accountability at Kellogg", description: "Creating a tool to rate teammates at Kellogg")
+team4 = Team.create(course_id: mgmt431.id, name: "Team 6307", description: "Group paper on IBM")
+team5 = Team.create(course_id: mktg430.id, name: "Marketing Masters", description: "Marketing simulation game")
+team6 = Team.create(course_id: mktg430.id, name: "The 5 P's", description: "Weekly case assignments")
 
-# Create Jane's friends
-Friend.create(user_id: jane.id, friend: eric.id)
-Friend.create(user_id: jane.id, friend: kristen.id)
-Friend.create(user_id: jane.id, friend: greg.id)
+# Create team members
+puts "Creating team members..."
+Team_Member.create(team_id: team1.id, user_id: eric.id)
+Team_Member.create(team_id: team1.id, user_id: tony.id)
+Team_Member.create(team_id: team2.id, user_id: sam.id)
 
-# Create Kristen's friends
-Friend.create(user_id: kristen.id, friend: eric.id)
-Friend.create(user_id: kristen.id, friend: orchid.id)
-Friend.create(user_id: kristen.id, friend: jane.id)
+Team_Member.create(team_id: team2.id, user_id: dave.id)
+Team_Member.create(team_id: team2.id, user_id: claudia.id)
 
-# Create Greg's friends
-Friend.create(user_id: greg.id, friend: eric.id)
-Friend.create(user_id: greg.id, friend: jane.id)
+Team_Member.create(team_id: team3.id, user_id: eric.id)
+Team_Member.create(team_id: team3.id, user_id: dave.id)
 
-# Create restaurants
-puts "Creating restaurants..."
-boltwood = Restaurant.create(name: "Boltwood", description: "New, local American by former Publican chef", cuisine:"American", location: "Evanston")
-the_cellar = Restaurant.create(name: "The Cellar", description: "Underground feel in ground-level restaurant", cuisine:"American", location: "Evanston")
-burger_king = Restaurant.create(name: "Burger King", description: "Open 24 hours...", cuisine:"Fast Food", location: "Evanston")
-taco_diablo = Restaurant.create(name: "Taco Diablo", description: "RIP", cuisine:"Mexican", location: "Heaven")
-lyfe_kitchen = Restaurant.create(name: "LYFE Kitchen", description: "Healthy food chain", cuisine:"Health Food", location: "Evanston")
+Team_Member.create(team_id: team4.id, user_id: claudia.id)
+Team_Member.create(team_id: team2.id, user_id: sam.id)
+
+Team_Member.create(team_id: team5.id, user_id: eric.id)
+Team_Member.create(team_id: team2.id, user_id: dave.id)
+Team_Member.create(team_id: team2.id, user_id: tony.id)
+Team_Member.create(team_id: team2.id, user_id: claudia.id)
+
+Team_Member.create(team_id: team6.id, user_id: sam.id)
+Team_Member.create(team_id: team2.id, user_id: tony.id)
 
 # Create reviews
 puts "Creating reviews..."
-Review.create(restaurant_id: boltwood.id, user_id: eric.id, rating: 4, review: "Great addition to Evanston dining scene, even if not quite up to expectations", notes: "Dollar oysters on some nights")
-Review.create(restaurant_id: the_cellar.id, user_id: orchid.id, rating: 5, review: "Great good at totally reasonable prices", notes: "Try to sit in the back")
-
-Review.create(restaurant_id: burger_king.id, user_id: eric.id, rating: 3, review: "Late night dance party is even better than the food", notes: "Never go during daylight")
-Review.create(restaurant_id: burger_king.id, user_id: greg.id, rating: 5, review: "Best cheeseburgers this side of the Mississippi", notes: "Make your own soda mix")
-
-Review.create(restaurant_id: taco_diablo.id, user_id: kristen.id, rating: 5, review: "Evanston sorely misses the tacos and vibe of this place", notes: "Have a taco before throwing back too many margaritas")
-
-
-# Create lists
-puts "Creating lists..."
-
-need_to_try = List.create(user_id: eric.id, name: "Need to try")
-
-date_night = List.create(user_id: eric.id, name: "Date night")
-
-avoid = List.create(user_id: jane.id, name: "Avoid at all costs")
-
-detox = List.create(user_id: greg.id, name: "For detox diet")
-
-# Create list items
-puts "Populating lists..."
-
-List_Item.create(list_id: need_to_try.id, restaurant_id: lyfe_kitchen.id)
-List_Item.create(list_id: need_to_try.id, restaurant_id: the_cellar.id)
-
-List_Item.create(list_id: date_night.id, restaurant_id: boltwood.id)
-
-List_Item.create(list_id: avoid.id, restaurant_id: burger_king.id)
-
-List_Item.create(list_id: detox.id, restaurant_id: lyfe_kitchen.id)
 
