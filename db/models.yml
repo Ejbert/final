@@ -5,24 +5,27 @@ User:
   email: string
   password: string
 
-Course:
+Friend:
+  user_id: integer
+  friend: integer
+
+Restaurant:
   name: string
   description: text
-  section: int
-  quarter: text
-  year: int
-
-Team:
-  course_id: int
-  name: string
-  description: text
-
-Team_Member:
-  team_id: int
-  user_id: int
+  cuisine: string
+  location: text
 
 Review:
-  team_member_id: int
+  restaurant_id: int
   user_id: int
-  rating: int
   review: text
+  rating: int
+  notes: text
+
+List:
+  user_id: int
+  name: string
+
+List_Item:
+  list_id: int
+  restaurant_id: int

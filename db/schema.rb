@@ -13,39 +13,45 @@
 
 ActiveRecord::Schema.define(version: 0) do
 
-  create_table "courses", force: :cascade do |t|
+  create_table "friends", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "friend"
+  end
+
+  add_index "friends", ["user_id"], name: "index_friends_on_user_id"
+
+  create_table "list_items", force: :cascade do |t|
+    t.integer "list_id"
+    t.integer "restaurant_id"
+  end
+
+  add_index "list_items", ["list_id"], name: "index_list_items_on_list_id"
+  add_index "list_items", ["restaurant_id"], name: "index_list_items_on_restaurant_id"
+
+  create_table "lists", force: :cascade do |t|
+    t.integer "user_id"
     t.string  "name"
-    t.text    "description"
-    t.integer "section"
-    t.text    "quarter"
-    t.integer "year"
+  end
+
+  add_index "lists", ["user_id"], name: "index_lists_on_user_id"
+
+  create_table "restaurants", force: :cascade do |t|
+    t.string "name"
+    t.text   "description"
+    t.string "cuisine"
+    t.text   "location"
   end
 
   create_table "reviews", force: :cascade do |t|
+    t.integer "restaurant_id"
     t.integer "user_id"
     t.text    "review"
     t.integer "rating"
-    t.integer "team_member_id"
+    t.text    "notes"
   end
 
-  add_index "reviews", ["team_member_id"], name: "index_reviews_on_team_member_id"
+  add_index "reviews", ["restaurant_id"], name: "index_reviews_on_restaurant_id"
   add_index "reviews", ["user_id"], name: "index_reviews_on_user_id"
-
-  create_table "team_members", force: :cascade do |t|
-    t.integer "team_id"
-    t.integer "user_id"
-  end
-
-  add_index "team_members", ["team_id"], name: "index_team_members_on_team_id"
-  add_index "team_members", ["user_id"], name: "index_team_members_on_user_id"
-
-  create_table "teams", force: :cascade do |t|
-    t.integer "course_id"
-    t.string  "name"
-    t.text    "description"
-  end
-
-  add_index "teams", ["course_id"], name: "index_teams_on_course_id"
 
   create_table "users", force: :cascade do |t|
     t.string "username"
